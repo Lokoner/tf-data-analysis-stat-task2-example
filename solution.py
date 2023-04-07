@@ -10,6 +10,6 @@ def solution(p: float, x: np.array) -> tuple:
     alpha = 1 - p
     loc = x.mean()
     scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    left = 0.014 + (norm.ppf(alpha / 2) + 1) * (loc - 0.014) / scale
-    right = 0.014 + (norm.ppf(1 - alpha / 2) + 1) * (loc - 0.014) / scale
-    return left, right
+    lower_bound = 0.014
+    upper_bound = loc + scale * norm.ppf(1 - alpha / 2)
+    return (lower_bound, upper_bound)
